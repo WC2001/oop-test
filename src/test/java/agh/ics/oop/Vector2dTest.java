@@ -39,8 +39,8 @@ public class Vector2dTest {
     }
     @Test
     void lowerLeftTest(){
-        assertEquals(new World.Vector2d(5,3), new World.Vector2d(5,19).lowerleft(new World.Vector2d(6,3)));
-        assertNotEquals(new World.Vector2d(5, 13), new World.Vector2d(5, 13).lowerleft(new World.Vector2d(5,4)));
+        assertEquals(new World.Vector2d(5,3), new World.Vector2d(5,19).lowerLeft(new World.Vector2d(6,3)));
+        assertNotEquals(new World.Vector2d(5, 13), new World.Vector2d(5, 13).lowerLeft(new World.Vector2d(5,4)));
     }
     @Test
     void addTest(){
