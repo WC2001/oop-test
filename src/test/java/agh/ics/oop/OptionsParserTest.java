@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class OptionsParserTest {
 
     void parseT(String[] args, MoveDirection[] correct){
-        MoveDirection[] tested = new World.OptionsParser(args).parse();
+        MoveDirection[] tested = new OptionsParser(args).parse();
 
         assertEquals(tested.length, correct.length);
 
