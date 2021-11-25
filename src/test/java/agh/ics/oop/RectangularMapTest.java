@@ -54,8 +54,6 @@ public class RectangularMapTest {
         assertNull(map.objectAt(new Vector2d(0,0)));
         assertNull(map.objectAt(new Vector2d(10,10)));
 
-
-
     }
 
 }

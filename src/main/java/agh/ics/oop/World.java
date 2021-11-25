@@ -6,16 +6,16 @@ public class World {
 
     public static void main(String[] args){
 
-        //System.out.println("Start");
+
 
         //run(transform(args));
 
-        //System.out.println("Stop");
+        IWorldMap map1 = new GrassField(10);
 
         MoveDirection[] directions = new OptionsParser(args).parse();
-        IWorldMap map = new RectangularMap(10, 5);
+        //IWorldMap map = new RectangularMap(10, 5);
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
-        IEngine engine = new SimulationEngine(directions, map, positions);
+        IEngine engine = new SimulationEngine(directions, map1, positions);
         engine.run();
 
     }
