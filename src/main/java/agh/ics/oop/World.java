@@ -10,7 +10,7 @@ public class World {
 
         //run(transform(args));
 
-        IWorldMap map1 = new GrassField(10);
+        AbstractWorldMap map1 = new GrassField(10);
 
         MoveDirection[] directions = new OptionsParser(args).parse();
         //IWorldMap map = new RectangularMap(10, 5);

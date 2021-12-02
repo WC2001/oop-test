@@ -8,13 +8,11 @@ import java.util.List;
 public class SimulationEngine implements IEngine{
 
     private final MoveDirection[] directions;
-    //private final Vector2d[] positions;
-    private final IWorldMap map;
+    private final AbstractWorldMap map;
     private final List<Animal> animals ;
 
-    SimulationEngine(MoveDirection[] directions, IWorldMap map, Vector2d[] positions) {
+    SimulationEngine(MoveDirection[] directions, AbstractWorldMap map, Vector2d[] positions) {
         this.directions = directions;
-        //this.positions = positions;
         this.map = map;
         this.animals = new ArrayList<>();
 

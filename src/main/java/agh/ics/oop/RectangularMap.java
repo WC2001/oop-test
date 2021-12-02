@@ -12,10 +12,10 @@ public class RectangularMap extends AbstractWorldMap{
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        if (position.x >= width || position.x < 0 || position.y >= height || position.y < 0)
+        if (position.x >= width || position.y >= height)
             return false;
 
-        return !isOccupied(position);
+        return super.canMoveTo(position);
     }
 
     @Override

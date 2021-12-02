@@ -1,14 +1,20 @@
 package agh.ics.oop;
 
-public class Animal{
+import java.util.ArrayList;
+import java.util.List;
+
+public class Animal extends AbstractWordMapElement{
     private MapDirection direction;
     private Vector2d position;
-    private IWorldMap map;
+    private final AbstractWorldMap map;
 
-    public Animal(IWorldMap map, Vector2d initialPosition){
+    private final List<IPositionChangeObserver> observers = new ArrayList<>();
+
+    public Animal(AbstractWorldMap map, Vector2d initialPosition){
         this.direction = MapDirection.NORTH;
         this.position = initialPosition;
         this.map = map;
+        this.addObserver(this.map);
 
     }
     public String toString(){
@@ -37,15 +43,40 @@ public class Animal{
             case RIGHT -> this.direction = this.direction.next();
             case LEFT -> this.direction = this.direction.previous();
             case BACKWARD -> {
-                if (this.map.canMoveTo(this.position.add(this.direction.toUnitVector().opposite())))
-                    this.position = this.position.add(this.direction.toUnitVector().opposite());
+                if (this.map.canMoveTo(this.position.add(this.direction.toUnitVector().opposite()))){
+                    Vector2d newPosition = this.position.add(this.direction.toUnitVector().opposite());
+                    positionChanged(this.position, newPosition);
+                    this.position = newPosition;
+                    this.map.updateArea(newPosition);
+                }
+
             }
             case FORWARD -> {
-                if (this.map.canMoveTo(this.position.add(this.direction.toUnitVector())))
-                    this.position = this.position.add(this.direction.toUnitVector());
+
+                if (this.map.canMoveTo(this.position.add(this.direction.toUnitVector()))){
+                    Vector2d newPosition = this.position.add(this.direction.toUnitVector());
+                    positionChanged(this.position, newPosition);
+                    this.position = newPosition;
+                    this.map.updateArea(newPosition);
+                }
+
 
             }
         }
 
     }
+
+    private void addObserver(IPositionChangeObserver observer) {
+        this.observers.add(observer);
+    }
+
+    private void removeObserver(IPositionChangeObserver observer) {
+        this.observers.remove(observer);
+    }
+
+    private void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        for (IPositionChangeObserver observer : this.observers)
+            observer.positionChanged(oldPosition, newPosition);
+    }
+
 }
