@@ -26,13 +26,12 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
         if(canMoveTo(animal.getPosition())) {
             this.animals.add(animal);
             hashMap.put(animal.getPosition(), animal);
-            updateArea(animal.getPosition());
             return true;
         }
-        return false;
+        throw new IllegalArgumentException("Cannot place animal at " + animal.getPosition());
     }
 
-    public Object objectAt(Vector2d position) {
+    public AbstractWordMapElement objectAt(Vector2d position) {
 
         return hashMap.get(position);
     }
@@ -41,10 +40,6 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
         return ! (hashMap.get(position) == null);
     }
 
-    public void updateArea(Vector2d test){
-        upper = upper.upperRight(test);
-        lower = lower.lowerLeft(test);
-    }
 
     public Pair<Vector2d,Vector2d> getArea()
     {

@@ -45,9 +45,12 @@ public class Animal extends AbstractWordMapElement{
             case BACKWARD -> {
                 if (this.map.canMoveTo(this.position.add(this.direction.toUnitVector().opposite()))){
                     Vector2d newPosition = this.position.add(this.direction.toUnitVector().opposite());
-                    positionChanged(this.position, newPosition);
+                    Vector2d oldPosition = this.position;
+
+
+                    positionChanged(oldPosition, newPosition);
                     this.position = newPosition;
-                    this.map.updateArea(newPosition);
+
                 }
 
             }
@@ -55,9 +58,12 @@ public class Animal extends AbstractWordMapElement{
 
                 if (this.map.canMoveTo(this.position.add(this.direction.toUnitVector()))){
                     Vector2d newPosition = this.position.add(this.direction.toUnitVector());
-                    positionChanged(this.position, newPosition);
+
+                    Vector2d oldPosition = this.position;
+
+                    positionChanged(oldPosition, newPosition);
                     this.position = newPosition;
-                    this.map.updateArea(newPosition);
+
                 }
 
 

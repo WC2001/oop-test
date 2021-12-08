@@ -1,16 +1,20 @@
 package agh.ics.oop;
 
 import org.junit.jupiter.api.Test;
+import org.testng.Assert;
 import org.testng.internal.collections.Pair;
+
+import java.util.concurrent.ThreadLocalRandom;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GrassFieldTest {
 
     public Vector2d findEmpty(GrassField map){
-        Pair<Vector2d,Vector2d> p = map.getArea();
-        for(int i=p.first().x;i<p.second().x;i++){
+        int x = ThreadLocalRandom.current().nextInt(0, (int) (Math.sqrt(10*10)+ 1));
+        for(int i=0;i<x;i++){
 
-            for(int j=p.first().y;j<p.second().y;j++){
+            for(int j=0;j<x;j++){
 
                 if (!map.isOccupied(new Vector2d(i,j))){
                     return new Vector2d(i,j);
@@ -49,7 +53,13 @@ public class GrassFieldTest {
         map.place(a);
 
         assertTrue(map.place(new Animal(map,new Vector2d(2,2))));
-        assertFalse(map.place(a));
+
+        try{
+            map.place(a);
+        } catch (Exception ex){
+            assertTrue(ex instanceof IllegalArgumentException);
+        }
+
 
     }
 
